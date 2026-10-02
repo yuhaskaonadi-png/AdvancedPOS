@@ -26,6 +26,7 @@ namespace AdvancedPOS.Views
         private Button btnCustomers;
         private Button btnStockAdjustment;
         private Button btnBackupRestore;
+        private Button btnSalesForecast;
         private Button btnThemeToggle;
 
         // ==========================================
@@ -99,6 +100,23 @@ namespace AdvancedPOS.Views
             btnThemeToggle.Padding = btnSettings.Padding;
             sidePanel.Controls.Add(btnThemeToggle);
             btnThemeToggle.BringToFront();
+
+            // ---- Sales Forecast Button (Settings එකේ Style එකම Copy කරලා) ----
+            btnSalesForecast = new Button();
+            btnSalesForecast.Text = "📈 Sales Forecast";
+            btnSalesForecast.Dock = DockStyle.Top;
+            btnSalesForecast.Cursor = Cursors.Hand;
+            btnSalesForecast.Height = btnSettings.Height;
+            btnSalesForecast.Font = btnSettings.Font;
+            btnSalesForecast.ForeColor = btnSettings.ForeColor;
+            btnSalesForecast.FlatStyle = btnSettings.FlatStyle;
+            btnSalesForecast.FlatAppearance.BorderSize = btnSettings.FlatAppearance.BorderSize;
+            btnSalesForecast.FlatAppearance.BorderColor = btnSettings.FlatAppearance.BorderColor;
+            btnSalesForecast.TextAlign = btnSettings.TextAlign;
+            btnSalesForecast.Padding = btnSettings.Padding;
+            sidePanel.Controls.Add(btnSalesForecast);
+            btnSalesForecast.BringToFront();
+
             currentUserRole = role;
             _dashboardRepo = new DashboardRepository();
 
@@ -141,6 +159,7 @@ namespace AdvancedPOS.Views
             btnStockAdjustment.Click += btnStockAdjustment_Click;
             btnBackupRestore.Click += btnBackupRestore_Click;
             btnThemeToggle.Click += btnThemeToggle_Click;
+            btnSalesForecast.Click += btnSalesForecast_Click;
         }
 
         private void ApplyRolePermissions()
@@ -154,6 +173,7 @@ namespace AdvancedPOS.Views
                 btnSettings.Visible = false;
                 btnStockAdjustment.Visible = false;
                 btnBackupRestore.Visible = false;
+                btnSalesForecast.Visible = false;
             }
         }
 
@@ -278,6 +298,13 @@ namespace AdvancedPOS.Views
         private void btnStockAdjustment_Click(object sender, EventArgs e)
         {
             openChildForm(new Views.StockAdjustmentForm());
+        }
+        private void btnSalesForecast_Click(object sender, EventArgs e)
+        {
+            using (SalesForecastForm form = new SalesForecastForm())
+            {
+                form.ShowDialog(this);
+            }
         }
         private void btnBackupRestore_Click(object sender, EventArgs e)
         {
